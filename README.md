@@ -4,3 +4,11 @@ This repository contains analytics files and code used in the generation of the 
 &nbsp;
 ##### File descriptions:
 -------------------------
+
+| **SN** | **Directory** | **File**   | **Description** |
+|----------------|------------|------------|------------|
+|1||||
+|2||||
+|3||||
+|4||||
+
