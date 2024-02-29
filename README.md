@@ -1,6 +1,6 @@
-# Spatiotemporal immune atlas of the first clinical-grade, gene-edited pig-to-human kidney xenotransplant
+# Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans
 
-This repository contains analytics files and code used in the generation of the manuscript: *Spatiotemporal immune atlas of the first clinical-grade, gene-edited pig-to-human kidney xenotransplant*
+This repository contains analytics files and code used in the generation of the manuscript: *Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans*
 &nbsp;
 ##### File descriptions:
 -------------------------
