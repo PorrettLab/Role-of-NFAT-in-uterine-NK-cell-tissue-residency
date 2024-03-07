@@ -1,4 +1,4 @@
-# Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans
+## Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans
 
 This repository contains analytics files and code used in the generation of the manuscript: *Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans*
 &nbsp;
