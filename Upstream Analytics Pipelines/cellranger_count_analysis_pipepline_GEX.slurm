@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#job script for a typical cellranger count run 
+#job script for a typical cellranger count run - GEX
 
 #SBATCH --job-name=cellranger_count_UTx01_Bx03
 #SBATCH --output=res.out
