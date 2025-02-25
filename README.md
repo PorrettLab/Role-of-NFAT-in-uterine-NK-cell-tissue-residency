@@ -8,7 +8,7 @@ This repository contains analytics files and code used in the generation of the 
 
 Rebecca Asiimwe, Brittney Knott, Morgan E. Greene, Emma Wright, Markayla Bell, Daniel Epstein, Stefani D. Yates, Michael V. Gonzalez, Samantha Fry, Emily Boydston, Stephanie Clevenger, Jayme E. Locke, Brian E. Brocato, Constantine M. Burgan, Richard Burney, Nitin Arora, Virginia E. Duncan, Holly E. Richter, Deidre Gunn, Aharon G. Freud, Shawn C. Little, Paige M. Porrett
 
-DOI: https://doi.org/10.1101/2024.03.07.583906 (Current)
+DOI: https://doi.org/10.1101/2024.03.07.583906
 
 <!---
 Script in the ["HC_UTx_preprocessing.Rmd"](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/blob/main/HC_UTx_preprocessing.Rmd) file outlines preprocessing and quality control meassures applied to the 6 health control and 5 uterine transplant datasets utilized in this manuscript.
@@ -25,7 +25,7 @@ Script in the ["HC_UTx_preprocessing.Rmd"](https://github.com/PorrettLab/Role-of
 |4|[Downstream Analytics](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/tree/main/Downstream%20Analytics)|[scrublet_doublet_prediction.ipynb](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/blob/main/Downstream%20Analytics/scrublet_doublet_prediction.ipynb)|Notebook that depicts the workflow used to predict neotypic doublets in our data|
 |5|[Downstream Analytics](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/tree/main/Downstream%20Analytics)|[Quality_Control.Rmd](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/blob/main/Downstream%20Analytics/Quality_Control.Rmd)|RMD file that shows QC conducted on all datasets analysed in this study|
 |6|[Downstream Analytics](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/tree/main/Downstream%20Analytics)|[sample_integration_and_analysis.Rmd](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/blob/main/Downstream%20Analytics/sample_integration_and_analysis.Rmd)|RMD file that shows the analysis workflow of scRNA-seq data used in this study|
-
+|7|[Downstream Analytics](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/tree/main/Downstream%20Analytics)|[Analysis_of_CITE_Seq_datasets.Rmd](https://github.com/PorrettLab/Role-of-NFAT-in-uterine-NK-cell-tissue-residency/blob/main/Downstream%20Analytics/Analysis_of_CITE_Seq_datasets.Rmd)|RMD file that encapsulates the analysis workflow of CITE-Seq datasets used in this study|
 
 
 <!---
