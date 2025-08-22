@@ -14,7 +14,7 @@ editor_options:
 ### Load Required Packages
 ```{r}
 suppressPackageStartupMessages({
-library(Seurat)
+  library(Seurat)
   library(ggplot2)
   library(patchwork)
   library(dplyr)
@@ -92,7 +92,7 @@ sc = autoEstCont(sc)
 corrected.count.matrix = adjustCounts(sc)
 dim(corrected.count.matrix)
 
-# Save corrected count matrix for use in downstream analyses
+# Save the corrected count matrix for use in downstream analyses
 DropletUtils:::write10xCounts("soupX_filtered/HC01_soupX_filtered", corrected.count.matrix)
 
 rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
