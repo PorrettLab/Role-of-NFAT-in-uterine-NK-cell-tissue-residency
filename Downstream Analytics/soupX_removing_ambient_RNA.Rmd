@@ -75,17 +75,25 @@ https://cran.r-project.org/web/packages/SoupX/readme/README.html and here:
 
 https://rawcdn.githack.com/constantAmateur/SoupX/204b602418df12e9fdb4b68775a8b486c6504fe4/inst/doc/pbmcTutorial.html
 
-Prviously, we have worked with various methods such as running soupX by defining our own clusters, manually loading and decontaminating the data (leveraging clusters from cellranger analysis) and the automatic method of estimating the contamination fraction and decontaminate data. Leverages clustering information from cellranger. We shall use the latter method for our runs.
+Prviously, we have worked with various methods such as running soupX by defining our own clusters, manually loading and decontaminating the data (leveraging clusters from cellranger analysis) and the automatic method of estimating the contamination fraction and decontaminate data - leverages clustering information from cellranger. We shall use the latter method for our runs.
 
 ## HC01
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/HC01/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/HC01/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/HC01_soupX_filtered", out1)
+str(sc) 
+
+# Estimate rho (the contamination fraction is parametrised as rho. rho=0 implies no contamination and rho=1 implies 100% of UMIs in a droplet are soup!)
+# The idea is that genes that are highly expressed in the soup and are marker genes for some population can be used to estimate the background contamination. Marker genes are identified from cluster information. The contamination fraction is then calculated at the cluster level for each of these genes and clusters are then aggressively pruned to remove those that give implausible estimates.
+
+sc = autoEstCont(sc)
+
+# After the level of background contamination has been estimated or specified for a channel, calculate the resulting corrected count matrix with background contamination removed.
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
+
+# Save corrected count matrix for use in downstream analyses
+DropletUtils:::write10xCounts("soupX_filtered/HC01_soupX_filtered", corrected.count.matrix)
 
 rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
 gc()
@@ -93,197 +101,209 @@ gc()
 
 ## HC10	
 ```{r}
-sc1 = load10X("/cellranger_pipeline_analysis/HC10/outs/")
+sc = load10X("/cellranger_pipeline_analysis/HC10/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/HC10_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/HC10_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## HC12
 ```{r}
-sc1 = load10X("/cellranger_pipeline_analysis/HC12/outs/")
+sc = load10X("/cellranger_pipeline_analysis/HC12/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/HC12_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/HC12_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## HC18_CD45
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/HC18sortedCD45/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/HC18sortedCD45/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/HC18_CD45_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/HC18_CD45_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## HC19
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/HC19/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/HC19/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/HC19_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/HC19_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## HC20
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/HC20/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/HC20/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/HC20_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/HC20_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## UTX01_BX02
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTx01_Bx02/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTx01_Bx02/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx02_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx02_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## UTX01_BX03
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTX01_BX03/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTX01_BX03/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx03_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx03_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## UTX01_BX04
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTX01_BX04/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTX01_BX04/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx04_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx04_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## UTX01_BX05
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTx01_Bx05/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTx01_Bx05/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx05_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/UTx01_Bx05_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## UTX02_BX02
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTx02_Bx02/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTx02_Bx02/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx02_Bx02_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
+DropletUtils:::write10xCounts("soupX_filtered/UTx02_Bx02_soupX_filtered", corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+rm(list = ls()) 
 gc()
 ```
 
 ## UTX03_BX02
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTx03_Bx02/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTx03_Bx02/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx03_Bx02_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/UTx03_Bx02_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## UTX03_BX03
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTx03_Bx03/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTx03_Bx03/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx03_Bx03_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/UTx03_Bx03_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls()) 
 gc()
 ```
 
 ## UTx04_Bx02
 ```{r, eval=FALSE}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTx04_Bx02/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTx04_Bx02/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx04_Bx02_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
+DropletUtils:::write10xCounts("soupX_filtered/UTx04_Bx02_soupX_filtered", corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+rm(list = ls()) 
 gc()
 ```
 
 ## UTx05_Bx03
 ```{r}
-sc1 = load10X("/cell_ranger_pipepline_analysis/UTx05_Bx03/outs/")
+sc = load10X("/cell_ranger_pipepline_analysis/UTx05_Bx03/outs/")
 
-str(sc1) 
-sc1 = autoEstCont(sc1)
-out1 = adjustCounts(sc1)
-dim(out1)
-DropletUtils:::write10xCounts("soupX_filtered/UTx05_Bx03_soupX_filtered", out1)
+str(sc) 
+sc = autoEstCont(sc)
+corrected.count.matrix = adjustCounts(sc)
+dim(corrected.count.matrix)
 
-rm(list = ls()) #Clearing environment as we'll not be using the created objects downstream
+DropletUtils:::write10xCounts("soupX_filtered/UTx05_Bx03_soupX_filtered", corrected.count.matrix)
+
+rm(list = ls())
 gc()
 ```
 
