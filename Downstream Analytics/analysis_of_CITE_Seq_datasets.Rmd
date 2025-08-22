@@ -14,7 +14,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 CITE-Seq Datasets:
 
 HC:
@@ -79,7 +78,6 @@ DefaultAssay(HC10)
 dim(HC10)
 unique(HC10@meta.data$orig.ident)
 head(colnames(HC10))
-head(colnames(HC10))
 HC10@meta.data$Sequencing <- "3'"
 unique(HC10@meta.data$Sequencing)
 HC10@meta.data$Phase <- "Mid_Secretory"
@@ -94,7 +92,6 @@ DefaultAssay(HC12) <- "RNA"
 DefaultAssay(HC12)
 dim(HC12)
 unique(HC12@meta.data$orig.ident)
-head(colnames(HC12))
 head(colnames(HC12))
 HC12@meta.data$Sequencing <- "3'"
 unique(HC12@meta.data$Sequencing)
@@ -112,7 +109,6 @@ DefaultAssay(HC20)
 dim(HC20)
 unique(HC20@meta.data$orig.ident)
 HC20@meta.data$orig.ident <- "HC20"
-head(colnames(HC20))
 head(colnames(HC20))
 HC20@meta.data$Sequencing <- "3'"
 unique(HC20@meta.data$Sequencing)
@@ -149,7 +145,7 @@ UTx01_Bx04 <- readRDS("HC_UTx_Objects/QCed/UTx01_Bx04_SeuratObject_soupX_doublet
 Assays(UTx01_Bx04) 
 dim(UTx01_Bx04)
 head(colnames(UTx01_Bx04))
-DefaultAssay(UTx01_Bx04) #Should be RNA (otherwise would have been SCT if normalized)
+DefaultAssay(UTx01_Bx04) 
 head(colnames(UTx01_Bx04))
 UTx01_Bx04@meta.data$Phase <- "Mid_Secretory"
 unique(UTx01_Bx04@meta.data$Phase)
@@ -164,7 +160,7 @@ UTx03_Bx02 <- readRDS("HC_UTx_Objects/QCed/UTx03_Bx02_SeuratObject_soupX_doublet
 Assays(UTx03_Bx02)
 dim(UTx03_Bx02) 
 head(colnames(UTx03_Bx02))
-DefaultAssay(UTx03_Bx02) #Should be RNA (otherwise would have been SCT if normalized)
+DefaultAssay(UTx03_Bx02) 
 head(colnames(UTx03_Bx02))
 UTx03_Bx02@meta.data$Phase <- "Mid_Secretory"
 unique(UTx03_Bx02@meta.data$Phase)
@@ -178,7 +174,7 @@ UTx03_Bx03 <- readRDS("HC_UTx_Objects/QCed/UTx03_Bx03_SeuratObject_soupX_doublet
 Assays(UTx03_Bx03)
 dim(UTx03_Bx03) 
 head(colnames(UTx03_Bx03))
-DefaultAssay(UTx03_Bx03) #Should be RNA (otherwise would have been SCT if normalized)
+DefaultAssay(UTx03_Bx03) 
 head(colnames(UTx03_Bx03))
 UTx03_Bx03@meta.data$Phase <- "Early_Secretory"
 unique(UTx03_Bx03@meta.data$Phase)
@@ -192,7 +188,7 @@ UTx05_Bx03 <- readRDS("UTx05_Bx03/CITE_Seq_QC/UTx05_Bx03_CITE_Seq_SeuratObject_s
 UTx05_Bx03@assays
 dim(UTx05_Bx03)
 head(colnames(UTx05_Bx03))
-DefaultAssay(UTx05_Bx03) #Should be RNA (otherwise would have been SCT if normalized)
+DefaultAssay(UTx05_Bx03)
 UTx05_Bx03 <- RenameCells(object = UTx05_Bx03, add.cell.id = "Mid_Late_Secretory_UTx05_Bx03")
 head(colnames(UTx05_Bx03))
 UTx05_Bx03@meta.data$Phase <- "Mid_Late_Secretory"
@@ -239,7 +235,7 @@ unique(merged_object@meta.data[c("orig.ident", "Sequencing", "Phase")])
 
 unique(merged_object@meta.data$orig.ident)
 
-#Double checking QC before norm
+#Double checking QC before normalizing
 VlnPlot(
   merged_object, features = c("nFeature_RNA"),   
   pt.size = 0, raster=FALSE, group.by = 'orig.ident') & 
@@ -266,7 +262,7 @@ VlnPlot(
 ```{r, eval=FALSE}
 #Data already filtered - no need for re-filtering
 #Using the same normalization method across all datasets
-#Before running Harmony, follow the standard seurat pipeline through PCA
+#Before running Harmony, we'll follow the standard seurat pipeline through PCA
 
 DefaultAssay(merged_object) <- 'RNA'
 merged_object <- SCTransform(merged_object, vars.to.regress = "percent.mt", verbose = FALSE, return.only.var.genes = FALSE)  #Note that this single command replaces NormalizeData(), ScaleData(), and FindVariableFeatures() 
@@ -275,7 +271,7 @@ merged_object <- RunPCA(merged_object)
 
 DefaultAssay(merged_object) <- 'ADT'
 # we will use all ADT features for dimensional reduction
-# we set a dimensional reduction name to avoid overwriting the 
+# we set a dimensional reduction name to avoid overwriting that of the RNA assay
 VariableFeatures(merged_object) <- rownames(merged_object[["ADT"]])
 merged_object <- NormalizeData(merged_object, normalization.method = 'CLR', margin = 2) %>% 
   ScaleData() %>% RunPCA(reduction.name = 'apca')
@@ -298,7 +294,6 @@ unique(merged_object@meta.data$Phase)
 unique(merged_object@meta.data$Sequencing)
 merged_object@assays
 
-#There is a some difference between the datasets and sequencing types in the uncorrected PCs
 options(repr.plot.height = 5, repr.plot.width = 12)
 p1 <- DimPlot(object = merged_object, reduction = "pca", pt.size = .1, group.by = "Sample")
 p2 <- VlnPlot(object = merged_object, features = "PC_1", group.by = "Sample",  pt.size = .1)
@@ -313,10 +308,9 @@ rm(merged_object)
 ```
 
 ```{r, fig.width=12, eval=FALSE}
-#The simplest way to run Harmony is to pass the Seurat object and specify which variable(s) to integrate out. RunHarmony returns a Seurat object, updated with the corrected Harmony coordinates. Let's set plot_convergence to TRUE, so we can make sure that the Harmony objective function gets better with each round.
-#merged_object <- RunHarmony(merged_object, 'Sample', assay.use = "SCT", reduction = "pca")#controling sample effects
+#The simplest way to run Harmony is to pass the Seurat object and specify which variable(s) to integrate on. RunHarmony returns a Seurat object, updated with the corrected Harmony coordinates. Let's set plot_convergence to TRUE, so we can make sure that the Harmony objective function gets better with each round.
 
-#spliting harmony modalities: https://github.com/satijalab/seurat/issues/6094
+#running harmony on each modality
 unique(merged_object$Sequencing) #no need to regress on - all are 3'
 unique(merged_object$Cross_Lib)
 
@@ -362,9 +356,10 @@ p1+p2
 
 ## Downstream analysis
 Many downstream analyses are performed on low dimensional embeddings, not gene expression. To use the corrected Harmony embeddings rather than PCs, set reduction = 'harmony'. For example, let's perform the UMAP and Nearest Neighbor analyses using the Harmony embeddings.
+
 ```{r}
 DefaultAssay(merged_object) <- "SCT"
-# Examine and visualize PCA results - needed but checking pca results
+# Examine and visualize PCA results 
 DimHeatmap(merged_object, dims = 1, cells = 500, balanced = TRUE)
 ```
 
@@ -459,11 +454,7 @@ DefaultAssay(merged_object) <- "SCT"
 
 ```{r, fig.width=15}
 #Next:
-# Identify multimodal neighbors. These will be stored in the neighbors slot, 
-# and can be accessed using bm[['weighted.nn']]
-# The WNN graph can be accessed at bm[["wknn"]], 
-# and the SNN graph used for clustering at bm[["wsnn"]]
-# Cell-specific modality weights can be accessed at bm$RNA.weight
+# Identify multimodal neighbors. These will be stored in the neighbors slot
 merged_object <- FindMultiModalNeighbors(
   merged_object, 
   reduction.list = list("harmony_rna", "harmony_adt"), #A list of two dimensional reductions, one for each of the modalities to be integrated
@@ -508,7 +499,7 @@ DimPlot(set2, reduction = "wnn.umap", label = FALSE, pt.size = 0.001, split.by =
 ```
 
 ```{r, fig.width=15}
-#We can also compute UMAP visualization based on only the RNA and protein data and compare. We find that the RNA analysis is more informative than the ADT analysis in identifying progenitor states (the ADT panel contains markers for differentiated cells), while the converse is true of T cell states (where the ADT analysis outperforms RNA).
+#We can also compute UMAP visualization based on only the RNA and protein data and compare. 
 merged_object <- RunUMAP(merged_object, reduction = 'harmony_rna', dims = 1:30, assay = 'SCT', 
                          reduction.name = 'rna.umap', reduction.key = 'rnaUMAP_')
 merged_object <- RunUMAP(merged_object, reduction = 'harmony_adt', dims = 1:13, assay = 'ADT', 
@@ -535,8 +526,6 @@ p1 + p2
 ```
 
 ```{r, fig.width=20, fig.height=10}
-#merged_object <- SetIdent(merged_object, value = "seurat_clusters")
-
 p5 <- FeaturePlot(merged_object, features = c("Hu.CD103","Hu.CD11c","Hu.CD16"),
                   reduction = 'wnn.umap', max.cutoff = 2, 
                   cols = c("lightgrey","darkgreen"), ncol = 3, pt.size = 0.001)
@@ -630,13 +619,11 @@ saveRDS(merged_object, file="merged_object_Harmony_clean_CITE_Seq.rds")
 
 ## Cell enumerations
 ```{r, fig.width=20, fig.height=6}
-#No need to rerun this as it takes a while
 DefaultAssay(merged_object) <- 'SCT'
 cellsPerClust <- as.data.frame(table(merged_object@active.ident))
 colnames(cellsPerClust) <- c("Cluster", "nCells")
 cellsPerClust
 write.csv(cellsPerClust, file="Markers/cluster_cell_enumerations/cellsPerClust.csv")
-#Overall number of cells = 8041
 
 colourCount = length(unique(cellsPerClust$Cluster))
 getPalette = colorRampPalette(brewer.pal(11, "RdYlBu"))
@@ -660,10 +647,6 @@ write.csv(cellsPerClustPerSample, file="Markers/cluster_cell_enumerations/cellsP
 ```
 
 ## Finding markers
-https://github.com/satijalab/seurat/discussions/4032
-satijalab: Thanks for asking. We had anticipated extending Seurat to actively support DE using the pearson residuals of sctransform, but have decided not to do so. In some cases, Pearson residuals may not be directly comparable across different datasets, particularly if there are batch effects that are unrelated to sequencing depth. While it is possible to correct these differences using the SCTransform-based integration workflow for the purposes of visualization/clustering/etc., we do not recommend running differential expression directly on Pearson residuals. Instead, we recommend running DE on the standard RNA assay.
-
-
 ### Markers - RNA
 ```{r}
 DefaultAssay(merged_object) <- 'SCT'
@@ -672,7 +655,6 @@ DefaultAssay(merged_object) <- 'SCT'
 
 for(i in clusters){
   cluster.markers <- FindMarkers(merged_object, ident.1 = i, min.pct = 0.25, logfc.threshold = 0.25, only.pos = FALSE) 
-  #Extracting all markers (https://github.com/satijalab/seurat/issues/2154)
   cluster.markers <- cluster.markers %>% arrange(desc(avg_log2FC))
   write.csv(cluster.markers, file=paste0("Markers/RNA/All_Cluster", i, "_Markers_RNA.csv"))
 }
