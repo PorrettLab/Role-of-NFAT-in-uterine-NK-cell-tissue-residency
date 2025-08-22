@@ -1,7 +1,6 @@
 ---
 title: "Manuscript - Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans"
 subtitle: "Quality Control"
-author: "RA"
 output:
   rmdformats::readthedown:
     self_contained: true
