@@ -14,38 +14,38 @@ editor_options:
 ## Loading Required Libraries
 ```{r}
 suppressPackageStartupMessages({
-library(devtools)
-library(Seurat)
-library(ggplot2)
-library(patchwork)
-library(SeuratWrappers)
-library(dplyr)
-library(ape)
-library(Rfast2)
-library(RColorBrewer)
-library(viridis)
-library(data.table)
-library(tidyverse)
-library(magrittr)
-library(gridExtra)
-library(cowplot)
-library(Matrix)
-library(reticulate)
-library(WebGestaltR)
-library(harmony)
-library(MAST)
-library(purrr)
-library(usefun)
-library(formattable)
-library(splitstackshape)
-library(formatR)
-library(venn)
-library(VennDiagram)
-library(Hmisc)
-library(interp)
-library(SoupX)
-library(knitr)
-library(pheatmap)
+	library(devtools)
+	library(Seurat)
+	library(ggplot2)
+	library(patchwork)
+	library(SeuratWrappers)
+	library(dplyr)
+	library(ape)
+	library(Rfast2)
+	library(RColorBrewer)
+	library(viridis)
+	library(data.table)
+	library(tidyverse)
+	library(magrittr)
+	library(gridExtra)
+	library(cowplot)
+	library(Matrix)
+	library(reticulate)
+	library(WebGestaltR)
+	library(harmony)
+	library(MAST)
+	library(purrr)
+	library(usefun)
+	library(formattable)
+	library(splitstackshape)
+	library(formatR)
+	library(venn)
+	library(VennDiagram)
+	library(Hmisc)
+	library(interp)
+	library(SoupX)
+	library(knitr)
+	library(pheatmap)
 })
 ```
 
@@ -154,7 +154,7 @@ HC20@meta.data$Cross_Lib <- "NO"
 unique(HC20@meta.data$Cross_Lib)
 ```
 
-```{r, eval=FALSE}
+```{r}
 #Sanity check that all default assays are RNA for loaded HC biopsies
 DefaultAssay(HC01) #"RNA"
 DefaultAssay(HC18_CD45) #"RNA"
@@ -163,7 +163,7 @@ DefaultAssay(HC12) #"RNA"
 DefaultAssay(HC19) #"RNA"
 DefaultAssay(HC20) #"RNA"
 
-#Check that all IDs are tagged by phase
+#Check that all IDs are tagged by phase - can also be in metadata
 head(colnames(HC01)) #"Early_Secretory_HC01_AAACCTGAGCTGTCTA-1" "Early_Secretory_HC01_AAACCTGAGGTGATTA-1"
 head(colnames(HC18_CD45)) #"Early_Secretory_HC18_AAACCCAAGCCAACCC-1" "Early_Secretory_HC18_AAACCCAAGCGGATCA-1"
 head(colnames(HC10)) #"Mid_Secretory_HC10_AAACCCACACTGGATT-1" "Mid_Secretory_HC10_AAACCCACAGTCTACA-1"
@@ -174,7 +174,7 @@ head(colnames(HC20)) #"Late_Secretory_HC20_AAACCCACAAGTCCAT-1" "Late_Secretory_H
 
 ## UTx Datasets 
 ```{r}
-# - UTx01_Bx03 - 3' LH+6 (has both CITESeq and GEX cellranger runs) Mid Secretory
+# - UTx01_Bx03 - 3' LH+6 Mid Secretory (has both CITESeq and GEX cellranger runs) 
 UTx01_Bx03 <- readRDS("UTx01_Bx03_SeuratObject_soupX_doublet_QC_filtered.rds")
 dim(UTx01_Bx03) 
 head(colnames(UTx01_Bx03))
@@ -204,7 +204,7 @@ unique(UTx01_Bx04@meta.data$Sequencing)
 UTx01_Bx04@meta.data$Cross_Lib <- "NO"
 unique(UTx01_Bx04@meta.data$Cross_Lib)
 
-# - UTx01Bx05	*LH+9/10 3' scRNA Sequencing (3' GEX)  Mid Secretory/Late -10
+# - UTx01Bx05	*LH+9/10 3' Mid Secretory/Late -10
 UTx01_Bx05 <- readRDS("UTx01_Bx05_SeuratObject_soupX_doublet_QC_filtered.rds")
 dim(UTx01_Bx05)
 head(colnames(UTx01_Bx05))
