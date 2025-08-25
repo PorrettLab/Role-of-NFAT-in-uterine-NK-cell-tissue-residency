@@ -172,7 +172,7 @@ Seurat allows us to easily explore QC metrics and filter cells based on any user
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 HC01[["percent.mt"]] <- PercentageFeatureSet(HC01, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 HC01@meta.data %>%
   head(n=5)
 ```
@@ -187,7 +187,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(HC01, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(HC01, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -209,7 +209,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -280,7 +279,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -476,7 +475,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 HC10[["percent.mt"]] <- PercentageFeatureSet(HC10, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 HC10@meta.data %>%
   head(n=5)
 ```
@@ -491,7 +490,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(HC10, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(HC10, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -513,8 +512,7 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
-  col.ls <-
+   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
       c("nCount_RNA", "nFeature_RNA", "percent.mt", "log10GenesPerUMI")
@@ -584,7 +582,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -780,7 +778,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 HC12[["percent.mt"]] <- PercentageFeatureSet(HC12, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 HC12@meta.data %>%
   head(n=5)
 ```
@@ -795,7 +793,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(HC12, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(HC12, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -817,7 +815,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -888,7 +885,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -1084,7 +1081,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 HC18_CD45[["percent.mt"]] <- PercentageFeatureSet(HC18_CD45, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 HC18_CD45@meta.data %>%
   head(n=5)
 ```
@@ -1099,7 +1096,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(HC18_CD45, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(HC18_CD45, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -1121,7 +1118,7 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
+ 
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -1192,7 +1189,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -1388,7 +1385,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 HC19[["percent.mt"]] <- PercentageFeatureSet(HC19, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 HC19@meta.data %>%
   head(n=5)
 ```
@@ -1404,7 +1401,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(HC19, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(HC19, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -1426,8 +1423,7 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
-  col.ls <-
+   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
       c("nCount_RNA", "nFeature_RNA", "percent.mt", "log10GenesPerUMI")
@@ -1497,7 +1493,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -1694,7 +1690,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 HC20[["percent.mt"]] <- PercentageFeatureSet(HC20, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 HC20@meta.data %>%
   head(n=5)
 ```
@@ -1709,7 +1705,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(HC20, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(HC20, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -1731,7 +1727,7 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
+ 
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -1802,7 +1798,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -1993,13 +1989,12 @@ rm(HC20)
 gc()
 ```
 
-
 ## UTx01_Bx02 QC
 ```{r,fig.height=7, fig.width=13}
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx01_Bx02[["percent.mt"]] <- PercentageFeatureSet(UTx01_Bx02, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx01_Bx02@meta.data %>%
   head(n=5)
 ```
@@ -2013,9 +2008,8 @@ p3 <- VlnPlot(UTx01_Bx02, features = c("percent.mt"), ncol = 1, cols = "skyblue"
 grid.arrange(p1, p2, p3, ncol=3)
 ```
 
-
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx01_Bx02, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(UTx01_Bx02, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -2037,7 +2031,7 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
+ 
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -2108,7 +2102,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -2221,7 +2215,6 @@ head(rownames(UTx01_Bx02@meta.data))
 UTx01_Bx02 <- AddMetaData(UTx01_Bx02, scrublet_calls)
 ```
 
-
 ```{r, fig.height=4, fig.width=5}
 #Without normalizing the data, we want to first visualize the doublets in our datasets
 UTx01_Bx02_Control_2 <- UTx01_Bx02
@@ -2305,7 +2298,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx01_Bx03[["percent.mt"]] <- PercentageFeatureSet(UTx01_Bx03, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx01_Bx03@meta.data %>%
   head(n=5)
 ```
@@ -2320,7 +2313,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx01_Bx03, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(UTx01_Bx03, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -2342,7 +2335,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -2413,7 +2405,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -2462,8 +2454,6 @@ ggplot(UTx01_Bx03@meta.data, aes(x=UTx01_Bx03@meta.data$percent.mt)) +
 ```
 
 ### Data Filtering
-
-
 ```{r}
 (Count93_nCount_RNA <- quantile(UTx01_Bx03@meta.data$nCount_RNA, 0.93)) # calculate value in the 93rd percentile for a hint on thresholds but these should be taken with a grain of salt, look at the above plots as well to determine thresholds
 (Count93_nFeature_RNA <- quantile(UTx01_Bx03@meta.data$nFeature_RNA, 0.93))
@@ -2612,7 +2602,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx01_Bx04[["percent.mt"]] <- PercentageFeatureSet(UTx01_Bx04, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx01_Bx04@meta.data %>%
   head(n=5)
 ```
@@ -2627,7 +2617,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx01_Bx04, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(UTx01_Bx04, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -2649,7 +2639,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -2720,7 +2709,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -2916,7 +2905,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx01_Bx05[["percent.mt"]] <- PercentageFeatureSet(UTx01_Bx05, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx01_Bx05@meta.data %>%
   head(n=5)
 ```
@@ -2931,7 +2920,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx01_Bx05, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(UTx01_Bx05, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -2953,7 +2942,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -3024,7 +3012,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -3220,7 +3208,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx02_Bx02[["percent.mt"]] <- PercentageFeatureSet(UTx02_Bx02, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx02_Bx02@meta.data %>%
   head(n=5)
 ```
@@ -3235,7 +3223,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 ```
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx02_Bx02, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(UTx02_Bx02, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -3257,7 +3245,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -3328,7 +3315,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -3524,7 +3511,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx03_Bx02[["percent.mt"]] <- PercentageFeatureSet(UTx03_Bx02, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx03_Bx02@meta.data %>%
   head(n=5)
 ```
@@ -3540,7 +3527,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx03_Bx02, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(UTx03_Bx02, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -3562,7 +3549,7 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
+ 
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -3633,7 +3620,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -3829,7 +3816,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx03_Bx03[["percent.mt"]] <- PercentageFeatureSet(UTx03_Bx03, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx03_Bx03@meta.data %>%
   head(n=5)
 ```
@@ -3843,9 +3830,8 @@ p3 <- VlnPlot(UTx03_Bx03, features = c("percent.mt"), ncol = 1, cols = "skyblue"
 grid.arrange(p1, p2, p3, ncol=3)
 ```
 
-
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx03_Bx03, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60")
 plot2 <- FeatureScatter(UTx03_Bx03, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60")
 plot1 + plot2
@@ -3867,7 +3853,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
 
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -3938,7 +3923,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -4134,7 +4119,7 @@ gc()
 #We'll store the percentage of reads that map to the mitochondrial genome in the metadata object as "percent.mt"
 UTx04_Bx02[["percent.mt"]] <- PercentageFeatureSet(UTx04_Bx02, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx04_Bx02@meta.data %>% 
   head(n=5)
 ```
@@ -4148,9 +4133,8 @@ p3 <- VlnPlot(UTx04_Bx02, features = c("percent.mt"), ncol = 1, cols = "skyblue"
 grid.arrange(p1, p2, p3, ncol=3)
 ```
 
-
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx04_Bx02, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60") 
 plot2 <- FeatureScatter(UTx04_Bx02, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60") 
 plot1 + plot2
@@ -4172,7 +4156,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
   
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -4243,7 +4226,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -4430,7 +4413,7 @@ UTx05_Bx03@meta.data %>%
 
 UTx05_Bx03[["percent.mt"]] <- PercentageFeatureSet(UTx05_Bx03, pattern = "^MT-")
 
-#The number of unique genes and total molecules are automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
+#The number of unique genes and total molecules were automatically calculated during `CreateSeuratObject()` and we can find these stored in the object meta data as nFeature_RNA and nCount_RNA respecitvely.
 UTx05_Bx03@meta.data %>% 
   head(n=5)
 ```
@@ -4446,7 +4429,7 @@ grid.arrange(p1, p2, p3, ncol=3)
 
 
 ```{r, message=FALSE, fig.width=20, fig.height=7}
-#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.
+#FeatureScatter is typically used to visualize feature-feature relationships, but can be used for any variables in object metadata, PC scores etc.
 plot1 <- FeatureScatter(UTx05_Bx03, feature1 = "nCount_RNA", feature2 = "percent.mt", cols = "gray60") 
 plot2 <- FeatureScatter(UTx05_Bx03, feature1 = "nCount_RNA", feature2 = "nFeature_RNA", cols = "gray60") 
 plot1 + plot2
@@ -4468,7 +4451,6 @@ gp.ls <- df[, 2:4] %>% imap( ~ {
     return(c(y = median(x) + max(x) / 10, label = round(median(x), 2)))
   }
   
-  # assign colors
   col.ls <-
     setNames(
       c('gray50', 'gray70', 'gray90', "gray" ),
@@ -4539,7 +4521,7 @@ ggplot(metadata, aes(x = nUMI)) +
   geom_vline(xintercept = 500) + theme(legend.position = "none")+
   geom_density(lwd = 0.5, colour = 4,
                fill = 4, alpha = 0.1)
-#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, it is usable but the cells probably should have been sequenced more deeply
+#The UMI counts per cell should generally be above 500, that is the low end of what we expect. If UMI counts are between 500-1000 counts, the data is usable but the cells probably should have been sequenced more deeply
 ```
 
 ### More on Data and QC
@@ -4645,7 +4627,6 @@ head(rownames(scrublet_calls))
 head(rownames(UTx05_Bx03@meta.data))
 UTx05_Bx03 <- AddMetaData(UTx05_Bx03, scrublet_calls)
 ```
-
 
 ```{r, fig.height=4, fig.width=5}
 #Without normalizing the data, we want to first visualize the doublets in our datasets
