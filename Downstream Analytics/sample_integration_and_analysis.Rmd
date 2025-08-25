@@ -51,107 +51,27 @@ suppressPackageStartupMessages({
 
 ### Data Preparation per Sample
 
-## HC Datasets 
+## Loading HC Datasets 
 ```{r}
-#---------Early Secretory---------
-#Loading HC01
+#All data checks and QC were completed in a prior step
+
+#HC01
 HC01 <- readRDS("HC01_SeuratObject_soupX_doublet_QC_filtered.rds") 
-dim(HC01) 
-head(colnames(HC01))
-DefaultAssay(HC01) #Should be RNA (otherwise would have been SCT if normalized)
-HC01 <- RenameCells(object = HC01, add.cell.id = "Early_Secretory_HC01")
-head(colnames(HC01))
-HC01@meta.data$Phase <- "Early_Secretory"
-unique(HC01@meta.data$Phase)
-unique(HC01@meta.data$Sequencing)
-HC01@meta.data$Cross_Lib <- "NO" #Accounting for cross-lib runs as well
-unique(HC01@meta.data$Cross_Lib)
 
-
-#Loading HC18
+#HC18
 HC18_CD45 <- readRDS("HC18_CD45_SeuratObject_soupX_doublet_QC_filtered.rds")
-dim(HC18_CD45) 
-DefaultAssay(HC18_CD45) 
-head(colnames(HC18_CD45))
-HC18_CD45 <- RenameCells(object = HC18_CD45, add.cell.id = "Early_Secretory_HC18_CD45")
-head(colnames(HC18_CD45))
-unique(HC18_CD45@meta.data$Sequencing)
-HC18_CD45@meta.data$Phase <- "Early_Secretory"
-unique(HC18_CD45@meta.data$Phase)
-HC18_CD45@meta.data$Cross_Lib <- "NO"
-unique(HC18_CD45@meta.data$Cross_Lib)
 
-
-#---------Mid Secretory---------
-#Loading HC10
+#HC10
 HC10 <- readRDS("HC10_SeuratObject_soupX_doublet_QC_filtered.rds") 
-HC10@assays 
-DefaultAssay(HC10) <- "RNA" 
-DefaultAssay(HC10)
-dim(HC10) 
-unique(HC10@meta.data$orig.ident)
-head(colnames(HC10))
-HC10 <- RenameCells(object = HC10, add.cell.id = "Mid_Secretory_HC10")
-head(colnames(HC10))
-HC10@meta.data$Sequencing <- "3'"
-unique(HC10@meta.data$Sequencing)
-HC10@meta.data$Phase <- "Mid_Secretory"
-unique(HC10@meta.data$Phase)
-HC10@meta.data$Cross_Lib <- "NO"
-unique(HC10@meta.data$Cross_Lib)
 
-#Loading HC12
+#HC12
 HC12 <- readRDS("HC12_SeuratObject_soupX_doublet_QC_filtered.rds")
-HC12@assays 
-DefaultAssay(HC12) <- "RNA"
-DefaultAssay(HC12)
-dim(HC12) 
-unique(HC12@meta.data$orig.ident)
-head(colnames(HC12))
-HC12 <- RenameCells(object = HC12, add.cell.id = "Mid_Secretory_HC12")
-head(colnames(HC12))
-HC12@meta.data$Sequencing <- "3'"
-unique(HC12@meta.data$Sequencing)
-HC12@meta.data$Phase <- "Mid_Secretory"
-unique(HC12@meta.data$Phase)
-HC12@meta.data$Cross_Lib <- "NO"
-unique(HC12@meta.data$Cross_Lib)
 
-#Late Secretory
-#Loading HC19
+#HC19
 HC19 <- readRDS("HC19_SeuratObject_soupX_doublet_QC_filtered.rds") 
-HC19@assays 
-DefaultAssay(HC19) <- "RNA" 
-DefaultAssay(HC19)
-dim(HC19) 
-unique(HC19@meta.data$orig.ident)
-head(colnames(HC19))
-HC19 <- RenameCells(object = HC19, add.cell.id = "Late_Secretory_HC19")
-head(colnames(HC19))
-HC19@meta.data$Sequencing <- "3'"
-unique(HC19@meta.data$Sequencing)
-HC19@meta.data$Phase <- "Late_Secretory"
-unique(HC19@meta.data$Phase)
-HC19@meta.data$Cross_Lib <- "NO"
-unique(HC19@meta.data$Cross_Lib)
 
-#Loading HC20
+#HC20
 HC20 <- readRDS("HC20_SeuratObject_soupX_doublet_QC_filtered.rds")
-HC20@assays 
-DefaultAssay(HC20) <- "RNA"
-DefaultAssay(HC20)
-dim(HC20) 
-unique(HC20@meta.data$orig.ident)
-HC20@meta.data$orig.ident <- "HC20"
-head(colnames(HC20))
-HC20 <- RenameCells(object = HC20, add.cell.id = "Late_Secretory_HC20")
-head(colnames(HC20))
-HC20@meta.data$Sequencing <- "3'"
-unique(HC20@meta.data$Sequencing)
-HC20@meta.data$Phase <- "Late_Secretory"
-unique(HC20@meta.data$Phase)
-HC20@meta.data$Cross_Lib <- "NO"
-unique(HC20@meta.data$Cross_Lib)
 ```
 
 ```{r}
@@ -163,151 +83,34 @@ DefaultAssay(HC12) #"RNA"
 DefaultAssay(HC19) #"RNA"
 DefaultAssay(HC20) #"RNA"
 
-#Check that all IDs are tagged by phase - can also be in metadata
-head(colnames(HC01)) #"Early_Secretory_HC01_AAACCTGAGCTGTCTA-1" "Early_Secretory_HC01_AAACCTGAGGTGATTA-1"
-head(colnames(HC18_CD45)) #"Early_Secretory_HC18_AAACCCAAGCCAACCC-1" "Early_Secretory_HC18_AAACCCAAGCGGATCA-1"
-head(colnames(HC10)) #"Mid_Secretory_HC10_AAACCCACACTGGATT-1" "Mid_Secretory_HC10_AAACCCACAGTCTACA-1"
-head(colnames(HC12)) #"Mid_Secretory_HC12_AAACCCATCATGTCAG-1" "Mid_Secretory_HC12_AAACGAAAGTCGGGAT-1" 
-head(colnames(HC19)) #"Late_Secretory_HC19_AAACCCAAGAATTGCA-1" "Late_Secretory_HC19_AAACCCAAGACTGAGC-1" 
-head(colnames(HC20)) #"Late_Secretory_HC20_AAACCCACAAGTCCAT-1" "Late_Secretory_HC20_AAACCCAGTCTGTCCT-1"
-```
-
 ## UTx Datasets 
 ```{r}
-# - UTx01_Bx03 - 3' LH+6 Mid Secretory (has both CITESeq and GEX cellranger runs) 
+#UTx01_Bx03
 UTx01_Bx03 <- readRDS("UTx01_Bx03_SeuratObject_soupX_doublet_QC_filtered.rds")
-dim(UTx01_Bx03) 
-head(colnames(UTx01_Bx03))
-Assays(UTx01_Bx03) 
-DefaultAssay(UTx01_Bx03) <- "RNA"
-DefaultAssay(UTx01_Bx03) 
-UTx01_Bx03 <- RenameCells(object = UTx01_Bx03, add.cell.id = "Mid_Secretory_UTx01_Bx03")
-head(colnames(UTx01_Bx03))
-UTx01_Bx03@meta.data$Phase <- "Mid_Secretory"
-unique(UTx01_Bx03@meta.data$Phase)
-UTx01_Bx03@meta.data$Sequencing <- "3'"
-unique(UTx01_Bx03@meta.data$Sequencing)
-UTx01_Bx03@meta.data$Cross_Lib <- "NO"
-unique(UTx01_Bx03@meta.data$Cross_Lib)
 
-# - UTx01_Bx04 - 3' LH+4 Mid Secretory
+#UTx01_Bx04 
 UTx01_Bx04 <- readRDS("UTx01_Bx04_SeuratObject_soupX_doublet_QC_filtered.rds") 
-dim(UTx01_Bx04) 
-head(colnames(UTx01_Bx04))
-DefaultAssay(UTx01_Bx04) 
-UTx01_Bx04 <- RenameCells(object = UTx01_Bx04, add.cell.id = "Mid_Secretory_UTx01_Bx04")
-head(colnames(UTx01_Bx04))
-UTx01_Bx04@meta.data$Phase <- "Mid_Secretory"
-unique(UTx01_Bx04@meta.data$Phase)
-UTx01_Bx04@meta.data$Sequencing <- "3'"
-unique(UTx01_Bx04@meta.data$Sequencing)
-UTx01_Bx04@meta.data$Cross_Lib <- "NO"
-unique(UTx01_Bx04@meta.data$Cross_Lib)
 
-# - UTx01Bx05	*LH+9/10 3' Mid Secretory/Late -10
+#UTx01_Bx05	
 UTx01_Bx05 <- readRDS("UTx01_Bx05_SeuratObject_soupX_doublet_QC_filtered.rds")
-dim(UTx01_Bx05)
-head(colnames(UTx01_Bx05))
-DefaultAssay(UTx01_Bx05) 
-UTx01_Bx05 <- RenameCells(object = UTx01_Bx05, add.cell.id = "Mid_Late_Secretory_UTx01_Bx05")
-head(colnames(UTx01_Bx05))
-UTx01_Bx05@meta.data$Phase <- "Mid_Late_Secretory"
-unique(UTx01_Bx05@meta.data$Phase)
-UTx01_Bx05@meta.data$Sequencing <- "3'"
-unique(UTx01_Bx05@meta.data$Sequencing)
-UTx01_Bx05@meta.data$Cross_Lib <- "NO"
-unique(UTx01_Bx05@meta.data$Cross_Lib)
 
-
-# - UTX03_BX02 - ALL_GEX_LIBS run 3' LH+9  Mid Secretory
+#UTx03_BX02 
 UTx03_Bx02 <- readRDS("UTx03_Bx02_SeuratObject_soupX_doublet_QC_filtered.rds") 
-dim(UTx03_Bx02) 
-head(colnames(UTx03_Bx02))
-DefaultAssay(UTx03_Bx02) 
-UTx03_Bx02 <- RenameCells(object = UTx03_Bx02, add.cell.id = "Mid_Secretory_UTx03_Bx02")
-head(colnames(UTx03_Bx02))
-UTx03_Bx02@meta.data$Phase <- "Mid_Secretory"
-unique(UTx03_Bx02@meta.data$Phase)
-UTx03_Bx02@meta.data$Sequencing <- "3'"
-unique(UTx03_Bx02@meta.data$Sequencing)
-UTx03_Bx02@meta.data$Cross_Lib <- "YES"
-unique(UTx03_Bx02@meta.data$Cross_Lib)
 
+#UTx03_BX03
 UTx03_Bx03 <- readRDS("UTx03_Bx03_SeuratObject_soupX_doublet_QC_filtered.rds") 
-dim(UTx03_Bx03) 
-head(colnames(UTx03_Bx03))
-DefaultAssay(UTx03_Bx03) 
-UTx03_Bx03 <- RenameCells(object = UTx03_Bx03, add.cell.id = "Early_Secretory_UTx03_Bx03")
-head(colnames(UTx03_Bx03))
-UTx03_Bx03@meta.data$Phase <- "Early_Secretory"
-unique(UTx03_Bx03@meta.data$Phase)
-UTx03_Bx03@meta.data$Sequencing <- "3'"
-unique(UTx03_Bx03@meta.data$Sequencing)
-UTx03_Bx03@meta.data$Cross_Lib <- "YES"
-unique(UTx03_Bx03@meta.data$Cross_Lib)
 
-## UTx01_Bx02 LH+1  Early Secretory
+#UTx01_Bx02 
 UTx01_Bx02 <- readRDS("UTx01_Bx02_SeuratObject_soupX_doublet_QC_filtered.rds")
-dim(UTx01_Bx02)
-head(colnames(UTx01_Bx02))
-DefaultAssay(UTx01_Bx02) 
-UTx01_Bx02 <- RenameCells(object = UTx01_Bx02, add.cell.id = "Early_Secretory_UTx01_Bx02")
-head(colnames(UTx01_Bx02))
-UTx01_Bx02@meta.data$Phase <- "Early_Secretory"
-unique(UTx01_Bx02@meta.data$Phase)
-UTx01_Bx02@meta.data$Sequencing <- "5'"
-unique(UTx01_Bx02@meta.data$Sequencing)
-UTx01_Bx02@meta.data$Cross_Lib <- "NO"
-unique(UTx01_Bx02@meta.data$Cross_Lib)
-UTx01_Bx02@meta.data$Sample_Group <- "UTx"
-unique(UTx01_Bx02@meta.data$Sample_Group)
 
-## UTx02_Bx02 *LH=7/8
+#UTx02_Bx02 
 UTx02_Bx02 <- readRDS("UTx02_Bx02_SeuratObject_soupX_doublet_QC_filtered.rds")
-dim(UTx02_Bx02) 
-head(colnames(UTx02_Bx02))
-DefaultAssay(UTx02_Bx02) 
-UTx02_Bx02 <- RenameCells(object = UTx02_Bx02, add.cell.id = "Mid_Secretory_UTx02_Bx02")
-head(colnames(UTx02_Bx02))
-UTx02_Bx02@meta.data$Phase <- "Mid_Secretory"
-unique(UTx02_Bx02@meta.data$Phase)
-UTx02_Bx02@meta.data$Sequencing <- "3'"
-unique(UTx02_Bx02@meta.data$Sequencing)
-UTx02_Bx02@meta.data$Cross_Lib <- "NO"
-unique(UTx02_Bx02@meta.data$Cross_Lib)
-UTx02_Bx02@meta.data$Sample_Group <- "UTx"
-unique(UTx02_Bx02@meta.data$Sample_Group)
 
-## UTx04_Bx02 
+#UTx04_Bx02 
 UTx04_Bx02 <- readRDS("UTx04_Bx02_SeuratObject_soupX_doublet_QC_filtered.rds")
-dim(UTx04_Bx02) 
-head(colnames(UTx04_Bx02))
-DefaultAssay(UTx04_Bx02) 
-UTx04_Bx02 <- RenameCells(object = UTx04_Bx02, add.cell.id = "unknown_phase_UTx04_Bx02")
-head(colnames(UTx04_Bx02))
-UTx04_Bx02@meta.data$Phase <- "unknown_phase"
-unique(UTx04_Bx02@meta.data$Phase)
-UTx04_Bx02@meta.data$Sequencing <- "3'"
-unique(UTx04_Bx02@meta.data$Sequencing)
-UTx04_Bx02@meta.data$Cross_Lib <- "NO"
-unique(UTx04_Bx02@meta.data$Cross_Lib)
-UTx04_Bx02@meta.data$Sample_Group <- "UTx"
-unique(UTx04_Bx02@meta.data$Sample_Group)
 
-## UTx05_Bx03	*LH+9-10 3' scRNA Sequencing (3' GEX)  Mid Secretory/Late -10
+#UTx05_Bx03	
 UTx05_Bx03 <- readRDS("UTx05_Bx03_SeuratObject_soupX_doublet_QC_filtered.rds")
-dim(UTx05_Bx03) 
-head(colnames(UTx05_Bx03))
-DefaultAssay(UTx05_Bx03)
-UTx05_Bx03 <- RenameCells(object = UTx05_Bx03, add.cell.id = "Mid_Late_Secretory_UTx05_Bx03")
-head(colnames(UTx05_Bx03))
-UTx05_Bx03@meta.data$Phase <- "Mid_Late_Secretory"
-unique(UTx05_Bx03@meta.data$Phase)
-UTx05_Bx03@meta.data$Sequencing <- "3'"
-unique(UTx05_Bx03@meta.data$Sequencing)
-UTx05_Bx03@meta.data$Cross_Lib <- "NO"
-unique(UTx05_Bx03@meta.data$Cross_Lib)
-UTx05_Bx03@meta.data$Sample_Group <- "UTx"
 ```
 
 ## Merging All Samples (un normalized)
@@ -328,7 +131,7 @@ gc()
 ```
 
 ### Assessing cell distributions per sample
-Checking number of cells per sample to see whether we need to downsample based on this entire set as previously done
+Checking number of cells per sample to see whether we need to downsample based on this entire set
 ```{r}
 dist_nCells <- read.csv("dist_nCells.csv")
 unique(dist_nCells$Sample)
@@ -400,9 +203,6 @@ tbl <- as.data.frame(table(merged_object@meta.data$Sample_Group, merged_object@m
 
 
 ```{r, fig.width=8, fig.height=4}
-#Validate variable pairings introduced
-unique(merged_object@meta.data[c("orig.ident", "Sequencing", "Phase")])
-
 unique(merged_object@meta.data$orig.ident)
 
 #Double checking QC before norm
@@ -411,7 +211,6 @@ VlnPlot(
   pt.size = 0, raster=FALSE, group.by = 'orig.ident') & 
   theme(axis.title.x = element_blank(),
         legend.position = "none")
-
 
 VlnPlot(
   merged_object, features = c("nCount_RNA"),   
@@ -493,10 +292,10 @@ There is a clear difference between the datasets in the uncorrected PCs
 ### Run Harmony
 We run Harmony by passing the Seurat object and specifying which variable(s) to integrate on. RunHarmony() returns a Seurat object, updated with the corrected Harmony coordinates. Let's set plot_convergence to TRUE, so we can make sure that the Harmony objective function gets better with each round.
 
-Harmony integration on samples, sequencing and could account for any cross-lib confounding (we combined GEX only with CITE-Seq GEX libraries)
+Harmony integration on samples, sequencing, and if introduced, we could also account for any cross-lib confounding (we combined GEX only with CITE-Seq GEX libraries)
 
 ```{r, warning=FALSE, fig.height=4, fig.width=6}
-#Run harmony - specify variables to integrate on. In this case we are integrating on "orig.ident" which uniquely identifies each sample, chemistry (3' vs 5' and cross_lib)
+#Run harmony - specify variables to integrate on. In this case we are integrating on "orig.ident" which uniquely identifies each sample, Sequencing/chemistry (3' vs 5') and cross_lib
 merged_object <- merged_object_alpha
 rm(merged_object_alpha)
 harmonized_object <- RunHarmony(merged_object, 
@@ -553,7 +352,6 @@ plot_df <- data.frame(pct = pct,
 ```
 
 ### Determine number of principal components
-
 ```{r}
 # Examine and visualize PCA results 
 DimHeatmap(harmonized_object, dims = 1, cells = 500, balanced = TRUE, reduction = "harmony")
@@ -625,7 +423,6 @@ set2 <-   subset(harmonized_object, orig.ident == "HC20"  | orig.ident ==     "U
 set3 <-   subset(harmonized_object, orig.ident == "UTx02_Bx02"  | orig.ident ==     "UTx03_Bx02" | orig.ident ==      "UTx03_Bx03" | orig.ident ==      "UTx04_Bx02"  | orig.ident ==      "UTx05_Bx03" )  
 
 
-
 DimPlot(set1, reduction = "umap", label = FALSE, pt.size = 0.1, split.by = "orig.ident")  + 
   ggtitle("") + 
   theme(plot.title = element_text(size = 12, hjust = 0.5))
@@ -694,7 +491,7 @@ DimPlot(harmonized_object, reduction = "umap", label = FALSE, pt.size = 0.0001, 
 We can save the integrated, filtered and cleaned object at this point for use in further downstream analyses
 
 ```{r}
-saveRDS(harmonized_object, file = "merged_object_HC_UTx_15_way_merger_downsampled_afterSCT_Harmony_clean.rds")
+saveRDS(harmonized_object, file = "HC_UTx_15_way_merger_harmony_clean.rds")
 ```
 
 ### Cell enumerations
@@ -704,7 +501,6 @@ colnames(cellsPerClust) <- c("Cluster", "nCells")
 cellsPerClust
 write.csv(cellsPerClust, file="Markers/cluster_cell_enumerations/cellsPerClust.csv")
 sum(cellsPerClust$nCells) 
-
 
 colourCount = length(unique(cellsPerClust$Cluster))
 getPalette = colorRampPalette(brewer.pal(11, "RdYlBu"))
