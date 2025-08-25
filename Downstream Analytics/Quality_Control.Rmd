@@ -149,11 +149,9 @@ DefaultAssay(UTx04_Bx02) <- 'RNA'
 DefaultAssay(UTx05_Bx03) <- 'RNA' 
 ```
 
-## Conducting QC on Each Sample 
+## Conducting Quality Control (QC) on Each Sample 
 
 The steps below encompass the standard pre-processing workflow for scRNA-seq data in Seurat. These represent the selection and filtration of cells based on QC metrics, data normalization and scaling, and the detection of highly variable features.
-
-## Quality Control (QC)
 
 Seurat allows us to easily explore QC metrics and filter cells based on any user-defined criteria. A few QC metrics [commonly used](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4758103/) by the community include:
 
