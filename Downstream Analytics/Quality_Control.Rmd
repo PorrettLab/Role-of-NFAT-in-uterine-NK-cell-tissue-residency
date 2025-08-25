@@ -68,8 +68,6 @@ rm(x)
 ```
 
 ## Checking/Validating Details of each Object
-
-Validate cell prefix, orig.ident, Phase, Sequencing, and Sample_Group
 ```{r}
 HC01
 head(HC01@meta.data)
