@@ -6,9 +6,6 @@ output:
     self_contained: true
     thumbnails: false
     lightbox: true
-    #gallery: false
-    #fig_caption: true
-    #highlight: kate
     downcute_theme: "chaos"
 editor_options: 
   chunk_output_type: console
