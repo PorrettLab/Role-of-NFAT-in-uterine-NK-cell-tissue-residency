@@ -149,7 +149,7 @@ DefaultAssay(UTx04_Bx02) <- 'RNA'
 DefaultAssay(UTx05_Bx03) <- 'RNA' 
 ```
 
-## Conducting QC on Each Sample - Standard Pre-processing Workflow
+## Conducting QC on Each Sample 
 
 The steps below encompass the standard pre-processing workflow for scRNA-seq data in Seurat. These represent the selection and filtration of cells based on QC metrics, data normalization and scaling, and the detection of highly variable features.
 
