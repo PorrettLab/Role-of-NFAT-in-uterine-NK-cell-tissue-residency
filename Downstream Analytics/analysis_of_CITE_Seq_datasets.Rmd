@@ -265,7 +265,6 @@ DefaultAssay(merged_object) <- 'RNA'
 merged_object <- SCTransform(merged_object, vars.to.regress = "percent.mt", verbose = FALSE, return.only.var.genes = FALSE)  #Note that this single command replaces NormalizeData(), ScaleData(), and FindVariableFeatures() 
 merged_object <- RunPCA(merged_object)
 
-
 DefaultAssay(merged_object) <- 'ADT'
 # we will use all ADT features for dimensional reduction
 # we set a dimensional reduction name to avoid overwriting that of the RNA assay
@@ -275,7 +274,6 @@ merged_object <- NormalizeData(merged_object, normalization.method = 'CLR', marg
 
 saveRDS(merged_object, file="merged_object_normalized_CITE_Seq.rds")
 ```
-
 
 ## Running harmony on merged object - running harmony on the two mordalities in our dataset:- RNA and ADT
 https://github.com/satijalab/seurat/issues/6094
@@ -408,6 +406,7 @@ ElbowPlot(merged_object, ndims = 50, reduction = "harmony_rna")#determining dime
 ```
 
 ```{r}
+#We'll also determine the number of principal components for the ADT assay
 DefaultAssay(merged_object) <- "ADT"
 #Determine percent of variation associated with each PC
 pct <- merged_object[["harmony_adt"]]@stdev / sum(merged_object[["harmony_adt"]]@stdev) * 100
@@ -597,7 +596,6 @@ VlnPlot(merged_object, assay = "SCT", features = c("CD3E"), pt.size = 0)+ theme(
 VlnPlot(merged_object, assay = "SCT", features = c("CD3D"), pt.size = 0)+ theme(legend.position = "none")+ labs(x="Cluster")
 VlnPlot(merged_object, assay = "SCT", features = c("CD3G"), pt.size = 0)+ theme(legend.position = "none")+ labs(x="Cluster")
 VlnPlot(merged_object, assay = "SCT", features = c("CD4"), pt.size = 0)+ theme(legend.position = "none")+ labs(x="Cluster")
-
 
 VlnPlot(merged_object, assay = "RNA", features = c("NCAM1"), pt.size = 0)+ theme(legend.position = "none")+ labs(x="Cluster")
 VlnPlot(merged_object, assay = "RNA", features = c("FCGR3A"), pt.size = 0)+ theme(legend.position = "none")+ labs(x="Cluster")
