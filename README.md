@@ -1,12 +1,12 @@
-## Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans
+## Inhibition of NFAT after human uterus transplant promotes loss of tissue resident NK cells and attendant pregnancy complications
 
-This repository contains analytics files and code used in the generation of the manuscript: *Inhibition of NFAT promotes loss of tissue resident uterine natural killer cells and attendant pregnancy complications in humans*
+This repository contains analytics files and code used in the generation of the manuscript: *Inhibition of NFAT after human uterus transplant promotes loss of tissue resident NK cells and attendant pregnancy complications*
 &nbsp;
 
 -------------------------
 **Please cite:**
 
-Rebecca Asiimwe, Brittney Knott, Morgan E. Greene, Emma Wright, Markayla Bell, Daniel Epstein, Stefani D. Yates, Michael V. Gonzalez, Samantha Fry, Emily Boydston, Stephanie Clevenger, Jayme E. Locke, Brian E. Brocato, Constantine M. Burgan, Richard Burney, Nitin Arora, Virginia E. Duncan, Holly E. Richter, Deidre Gunn, Aharon G. Freud, Shawn C. Little, Paige M. Porrett
+Rebecca Asiimwe, Brittney Knott, Morgan E. Greene, Emma D. Wright, Markayla Bell, Daniel Epstein, Stefani D. Yates, Michael V. Gonzalez, Samantha Fry, Emily Boydston Procópio, Stephanie Clevenger, Jayme E. Locke, Brian E. Brocato, Constantine M. Burgan, Richard Burney, Nitin Arora, Virginia E. Duncan, Holly E. Richter, Deidre Gunn, Aharon G. Freud, Shawn C. Little, Paige M. Porrett
 
 DOI: https://doi.org/10.1101/2024.03.07.583906
 
